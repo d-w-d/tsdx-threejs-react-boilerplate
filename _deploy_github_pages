@@ -1,0 +1,58 @@
+#! /bin/bash
+
+### Details to deploy client to github pages
+GITHUB_USER_NAME='d-w-d'
+GITHUB_REPO_NAME='tsdx-threejs-react-boilerplate'
+BASE_HREF=$GITHUB_REPO_NAME
+
+### Make sure you have a modern version of sed (viz. gsed on Mac)
+SED=gsed
+if [[ ! $(command -v $SED) ]]; then
+  echo """
+    gsed not found!
+
+    If you're on Mac then install with \`brew install gsed\`
+    Else, change \$SED to point to a modern version of sed
+  """
+  exit 1
+fi
+
+### Let user know what's happening
+echo -e """ \033[32m
+===========================
+DEPLOYING BUNDLES TO GITHUB
+BASE_HREF : \033[36m${BASE_HREF} \033[32m
+=========================== \033[0m
+"""
+
+### Build library afresh
+./_build_all
+
+### Build react bundle that imports from library
+./node_modules/.bin/parcel build -d dist-gh-pages examples/react-demo/index.html
+
+### Change paths in index.html of react bundle to reflect non-root base-href
+$SED -i "s*href=\"/*href=\"/$GITHUB_REPO_NAME/*g" dist-gh-pages/index.html
+$SED -i "s*src=\"*src=\"/$GITHUB_REPO_NAME*g" dist-gh-pages/index.html
+
+### Copy image files into dir
+cp -R images dist-gh-pages/
+
+#################################################
+### DEPLOY TO GITHUB
+#################################################
+
+### Build commmand gh-pages to deploy
+read -r -d '' NODECMD <<EOM
+  const ghpages = require("gh-pages");
+  ghpages.publish("dist-gh-pages", function (err) {
+    if (!!err) {
+      console.log("OH NO! STH WENT WRONG :(", err);
+      process.exit(1);
+    }
+    console.log("DEPLOYED TO: https://${GITHUB_USER_NAME}.github.io/${GITHUB_REPO_NAME}/");
+  })
+EOM
+
+### Execute node code
+node -e "$NODECMD"

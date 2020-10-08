@@ -1,0 +1,80 @@
+{
+  "version": "0.1.0",
+  "name": "tsdx-threejs-react-boilerplate",
+  "displayName": "tsdx-threejs-react-boilerplate",
+  "license": "MIT",
+  "author": "d-w-d",
+  "module": "dist/tsdxthreejsreactboilerplate.esm.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch --format cjs,esm,umd --name TsdxThreeJsReactBoilerplate",
+    "build": "tsdx build --format cjs,esm,umd --name TsdxThreeJsReactBoilerplate",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "preinstall": "npx npm-force-resolutions",
+    "// 0": "Scripts to run development react",
+    "start-dev-react": "parcel src/dev.html",
+    "// 1": "Scripts to run demo-import packages",
+    "start-demo-react": "parcel examples/react-demo/index.html",
+    "build-demo-react": "parcel build -d examples/react-demo/dist examples/react-demo/index.html",
+    "start-demo-umd": "http-server --port 3333 -o examples/umd-demo"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint --fix"
+    }
+  },
+  "prettier": {
+    "printWidth": 90,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "size-limit": [
+    {
+      "path": "dist/tsdxthreejsreactboilerplate.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/tsdxthreejsreactboilerplate.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-app-polyfill": "^1.0.6",
+    "react-dom": "^16.13.1",
+    "three": "^0.121.1"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.6.0",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "gh-pages": "^3.1.0",
+    "http-server": "^0.12.3",
+    "husky": "^4.3.0",
+    "npm-force-resolutions": "0.0.3",
+    "parcel": "^1.12.4",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "size-limit": "^4.6.0",
+    "tsdx": "^0.14.0",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.3"
+  },
+  "resolutions": {
+    "rollup-plugin-typescript2": "0.27.3"
+  }
+}

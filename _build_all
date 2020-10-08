@@ -1,0 +1,21 @@
+#!/bin/bash
+
+clear
+echo """
+=========================================================
+    BUILDING UMD, CJS, ESM LIBRARIES
+=========================================================
+"""
+
+### Clean Up
+rm -rf dist
+rm -rf examples/umd-demo/*.js
+
+### Build
+./node_modules/.bin/tsdx build --format cjs,esm,umd --name TsdxThreeJsReactBoilerplate --transpileOnly
+
+### Copy over to examples
+cp dist/*.umd.development.js examples/umd-demo/
+
+### Build latest demo-react based on newest libraries
+npm run build-demo-react
