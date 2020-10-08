@@ -46,7 +46,7 @@ export abstract class AbstractSceneManager {
   preInitHook: () => void = () => {};
   postInitHook: () => void = () => {};
 
-  constructor(protected _containerId: string, protected _isWorldFlippable = true) {}
+  constructor(protected _containerId: string, protected _isWorldFlippable = false) {}
 
   async init() {
     // ------>>>

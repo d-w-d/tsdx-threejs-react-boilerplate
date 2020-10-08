@@ -34,9 +34,9 @@
     "noEmit": true,
     //
     "allowSyntheticDefaultImports": true,
-    "allowJs": true
     //
-    ,
+    "allowJs": true,
+    //
     "target": "ES5"
   }
 }

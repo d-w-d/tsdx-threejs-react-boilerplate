@@ -60,6 +60,7 @@
     "three": "^0.121.1"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^9.0.0",
     "@size-limit/preset-small-lib": "^4.6.0",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
@@ -69,6 +70,9 @@
     "npm-force-resolutions": "0.0.3",
     "parcel": "^1.12.4",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.3",
+    "rollup-plugin-typescript": "^1.0.1",
     "size-limit": "^4.6.0",
     "tsdx": "^0.14.0",
     "tslib": "^2.0.1",
